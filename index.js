@@ -3,7 +3,8 @@ const exp = require('express');
 const ap = exp();
 
 ap.use(cors({
-	origin: ['http://localhost:']
+	origin: ['http://localhost:3000', 
+		'http://192.168.1.139:5500']
 }))
 
 ap.get('/', (req, res) => {
@@ -30,7 +31,7 @@ ap.get('/services/:name', (req, res) => {
 });
 
 ap.get('/message', (req, res) => {
-	res.json(message: 'Hello From Mr. Pogi');
+	res.json({message: 'Hello From Mr. Pogi'});
 });
 
 ap.listen(3000, () => {
