@@ -3,30 +3,31 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Node JS test</title>
+	<title>Node.js Tests</title>
 </head>
 <body>
-	<h1>This is a test for Node.JS</h1>
-	<button>Get Message</button>
-<script>
-	const heading = document.querySelector('h1')
-	const button = document.querySelector('button')
+<h1>Test message</h1>
+<button>message</button>
 
-	button.addEventListener('click', () => {
-		fetch('http://localhost:3000/message')
+<script>
+	const heads = document.querySelector('h1');
+	const btn =  document.querySelector('button');
+
+	btn.addEventListener('click', () => {
+		fetch('http://localhost:4000/message')
 		.then(response => {
 			if(!response.ok){
 				throw new Error(`Server error: ${response.status} ${response.statusText}`)
 			}
-			return response.json()	
+			return response.json()
 		})
 		.then(data => {
-			heading.textContent = data.message
+			heads.textContent = data.message
 		})
 		.catch(err => {
 			console.error(err)
 		})
-	})
+	});
 </script>
 </body>
 </html>

@@ -1,39 +1,48 @@
-const cors = require('cors');
+const cor = require('cors');
 const exp = require('express');
-const ap = exp();
+const apk = exp();
 
-ap.use(cors({
-	origin: ['http://localhost:3000', 
-		'http://192.168.1.139:5500']
-}))
+apk.use(cor({
+	origin: [
+		'http://localhost:4000',
+		'http://192.168.1.139:4400'
+	]
+}));
 
-ap.get('/', (req, res) => {
-	res.send('Check this out on browser')
+apk.get('/', (req, res) => {
+	res.send('This is my last test really?');
 });
 
-ap.get('/about', (req, res) => {
-	res.send('now this is just about')
+apk.get('/about', (req, res) => {
+	res.send('This is the about Page');
 });
 
 const serv = [
-		{ id: 1, name: 'PCB Design', description: 'We will create the design for you'},
-		{ id: 2, name: 'PCB Layout', description: 'This is done after design'}
+		{id: 11, name: 'test', description: 'Testing lng'},
+		{id: 12, name: 'result', description: 'May Result na'}
 	];
 
-ap.get('/services', (req, res) => {
-	res.json(serv);
+apk.get('/services', (req, res) => {
+	res.send(serv);
 });
 
-ap.get('/services/:name', (req, res) => {
-	const name = req.params.name.toLowerCase();
-	const reqServ = serv.find((service) => service.name.toLowerCase() === name);
+apk.get('/services/:id', (req, res) => {
+	const ids = Number(req.params.id);
+
+	const reqServ = serv.find((service) => service.id === ids);
+
+	if(!reqServ){
+		// return res.json({ message: 'No such thing'});
+		return res.status(404).send('No such services here');
+	};
+
 	res.json(reqServ);
 });
 
-ap.get('/message', (req, res) => {
-	res.json({message: 'Hello From Mr. Pogi'});
+apk.get('/message', (req, res) => {
+	res.json({message: 'I am so Pogi'});
 });
 
-ap.listen(3000, () => {
-	console.log('Test if it wil run');
+apk.listen(4000, () => {
+	console.log('Server is now running');
 });
